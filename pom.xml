@@ -138,6 +138,17 @@
         <enabled>false</enabled>
       </releases>
     </pluginRepository>
+    <!-- needed for Groovy SNAPSHOTs see gmaven plugin below -->
+    <pluginRepository>
+      <id>oss.jfrog.org-snapshots</id>
+      <url>https://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </pluginRepository>
   </pluginRepositories>
 
   <modules>
@@ -328,6 +339,39 @@
             <autoVersionSubmodules>true</autoVersionSubmodules>
           </configuration>
         </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.gmavenplus</groupId>
+          <artifactId>gmavenplus-plugin</artifactId>
+          <version>${gmavenplus-plugin-version}</version>
+          <dependencies>
+            <!-- until we get a release that fixes https://issues.apache.org/jira/browse/GROOVY-8727
+                 we use a snapshot version
+            -->
+            <dependency>
+              <groupId>org.codehaus.groovy</groupId>
+              <artifactId>groovy</artifactId>
+              <!--<version>${groovy-version}</version>-->
+              <version>3.0.0-SNAPSHOT</version>
+              <scope>runtime</scope>
+            </dependency>
+            <dependency>
+              <groupId>org.codehaus.groovy</groupId>
+              <artifactId>groovy-xml</artifactId>
+              <!--<version>${groovy-version}</version>-->
+              <version>3.0.0-SNAPSHOT</version>
+              <scope>runtime</scope>
+            </dependency>
+            <dependency>
+              <groupId>org.codehaus.groovy</groupId>
+              <artifactId>groovy-ant</artifactId>
+              <!--<version>${groovy-version}</version>-->
+              <version>3.0.0-SNAPSHOT</version>
+              <scope>runtime</scope>
+            </dependency>
+          </dependencies>
+        </plugin>
+
       </plugins>
     </pluginManagement>
   </build>
