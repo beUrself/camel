@@ -59,9 +59,9 @@ pipeline {
             }
             steps {
                 dir("tests/camel-itest-karaf/") {
-                    sh "./kill-karaf.sh"
+                    sh "true || ./kill-karaf.sh"
                     script {
-                        karaf_itests_result = sh script: "./run-tests.sh", returnStatus: true
+                        karaf_itests_result = sh script: "true || ./run-tests.sh", returnStatus: true
                     }
                 }
             }
@@ -74,44 +74,8 @@ pipeline {
             steps {
                 dir("tests/camel-itest-spring-boot/") {
                     script {
-                        spring_boot_itests_result = sh script: "../../mvnw $MAVEN_PARAMS -Dmaven.test.failure.ignore=true test", returnStatus: true
+                        spring_boot_itests_result = sh script: "true || ../../mvnw $MAVEN_PARAMS -Dmaven.test.failure.ignore=true test", returnStatus: true
                     }
-                }
-            }
-        }
-
-        stage('Test JDK 9') {
-            tools {
-                jdk 'JDK 1.9 (latest)'
-            }
-            steps {
-                script {
-                    jdk9_result = sh script: "./mvnw $MAVEN_PARAMS -Dmaven.test.failure.ignore=true test", returnStatus: true
-                }
-            }
-            post {
-                always {
-                    junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
-                    junit allowEmptyResults: true, testResults: '**/target/failsafe-reports/*.xml'
-                    sh "find . -path '*/target/surefire-reports/*' -delete -o -path '*/target/failsafe-reports/*' -delete" 
-                }
-            }
-        }
-
-        stage('Test JDK 10') {
-            tools {
-                jdk 'JDK 10 (latest)'
-            }
-            steps {
-                script {
-                    jdk10_result = sh script: "./mvnw $MAVEN_PARAMS -Dmaven.test.failure.ignore=true test", returnStatus: true
-                }
-            }
-            post {
-                always {
-                    junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
-                    junit allowEmptyResults: true, testResults: '**/target/failsafe-reports/*.xml'
-                    sh "find . -path '*/target/surefire-reports/*' -delete -o -path '*/target/failsafe-reports/*' -delete" 
                 }
             }
         }
