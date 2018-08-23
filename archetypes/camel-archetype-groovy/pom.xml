@@ -46,7 +46,7 @@
     <resources>
       <resource>
         <directory>src/main/resources</directory>
-        <filtering>false</filtering>
+        <filtering>true</filtering>
       </resource>
       <resource>
         <directory>src/main/resources-filtered</directory>
@@ -56,6 +56,17 @@
         </includes>
       </resource>
     </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+            <useDefaultDelimiters>false</useDefaultDelimiters>
+            <delimiters>
+                <delimiter>@</delimiter>
+            </delimiters>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 
 </project>

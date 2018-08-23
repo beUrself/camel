@@ -149,6 +149,18 @@
         <enabled>false</enabled>
       </releases>
     </pluginRepository>
+    <!-- needed for Groovy Eclipse plugin -->
+    <pluginRepository>
+      <id>bintray</id>
+      <url>https://dl.bintray.com/groovy/maven</url>
+      <name>Bintray Repository</name>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </pluginRepository>
   </pluginRepositories>
 
   <modules>
