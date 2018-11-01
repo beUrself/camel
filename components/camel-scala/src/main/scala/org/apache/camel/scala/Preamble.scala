@@ -82,7 +82,7 @@ trait Preamble {
       (exchange: Exchange) =>
         run(exchange) map {
           case () => throw new RuntimeTransformException("Unit result cannot be used in Predicate")
-          case v => v
+          case v : Boolean => v
         } getOrElse false
 
     override def process(exchange: Exchange) {

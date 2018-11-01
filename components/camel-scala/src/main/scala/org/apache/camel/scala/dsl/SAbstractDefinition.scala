@@ -135,7 +135,14 @@ abstract class SAbstractDefinition[P <: ProcessorDefinition[_]] extends DSL with
   def routingSlip(expression: Exchange => Any) = wrap(target.routingSlip(expression))
 
   def script(expression: Exchange => Any) = wrap(target.script(expression))
-  def setBody(expression: Exchange => Any) = wrap(target.setBody(expression))
+  def setBody(expression: Exchange => Any) = {
+    val fn = new java.util.function.Function[Exchange, Any] {
+      override def apply(exchange: Exchange) = {
+        expression(exchange)
+      }
+    }
+    wrap(target.setBody(fn))
+  }
   def setFaultBody(expression: Exchange => Any) = wrap(target.setFaultBody(expression))
   def setHeader(name: String, expression: Exchange => Any) = wrap(target.setHeader(name, expression))
   def setExchangePattern(mep: ExchangePattern) = wrap(target.setExchangePattern(mep))

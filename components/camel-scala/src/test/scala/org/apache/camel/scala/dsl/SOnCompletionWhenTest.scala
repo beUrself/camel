@@ -25,7 +25,7 @@ class SOnCompletionWhenTest extends OnCompletionWhenTest with RouteBuilderSuppor
   override def createRouteBuilder = new RouteBuilder {
 
     "direct:start" ==> {
-      onCompletion(containsHello(_)) {
+      onCompletion(containsHello(_: Exchange)) {
         to("mock:sync")
       }
       to("mock:result")

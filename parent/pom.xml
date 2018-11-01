@@ -604,8 +604,8 @@
     <saaj-impl-version>1.3.2_2</saaj-impl-version>
     <saxon-bundle-version>9.8.0-14_1</saxon-bundle-version>
     <saxon-version>9.8.0-14</saxon-version>
-    <scala-version>2.11.7</scala-version>
-    <scala-maven-plugin-version>3.2.2</scala-maven-plugin-version>
+    <scala-version>2.12.7</scala-version>
+    <scala-maven-plugin-version>3.4.2</scala-maven-plugin-version>
     <scalatest-version>2.2.5</scalatest-version>
     <scalaxml-version>1.0.6</scalaxml-version>
     <scribe-version>1.3.7</scribe-version>
