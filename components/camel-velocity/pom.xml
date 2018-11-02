@@ -48,13 +48,6 @@
             <artifactId>velocity-engine-core</artifactId>
             <version>${velocity-version}</version>
         </dependency>
-        <!-- in Java 11+ Activation Framework is no longer included -->
-        <dependency>
-           <groupId>javax.activation</groupId>
-           <artifactId>javax.activation-api</artifactId>
-           <version>${activation-api-version}</version>
-           <optional>true</optional>
-        </dependency>
 
         <!-- test dependencies -->
         <dependency>

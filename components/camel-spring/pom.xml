@@ -174,6 +174,13 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+        <groupId>org.codehaus.woodstox</groupId>
+        <artifactId>woodstox-core-asl</artifactId>
+        <version>${woodstox-version}</version>
+        <scope>test</scope>
+    </dependency>
+
     <!-- for testing Spring AOP at class level -->
     <dependency>
       <groupId>org.aspectj</groupId>
@@ -372,7 +379,36 @@
           </execution>
         </executions>
       </plugin>
-      
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jaxb2-maven-plugin</artifactId>
+        <version>2.4</version>
+        <executions>
+          <execution>
+            <id>generate schema</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>schemagen</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <outputDirectory>${project.build.directory}/schema</outputDirectory>
+          <sources>
+            <source>${project.build.directory}/schema-src</source>
+          </sources>
+          <createJavaDocAnnotations>false</createJavaDocAnnotations>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>javax.activation-api</artifactId>
+            <version>${activation-api-version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>properties-maven-plugin</artifactId>
@@ -539,121 +575,6 @@
       <properties>
         <platform.skip.tests>org/apache/camel/spring/management/**/*.java</platform.skip.tests>
       </properties>
-    </profile>
-    <profile>
-       <id>woodstox</id>
-       <activation>
-         <activeByDefault>true</activeByDefault>
-       </activation>
-       <dependencies>
-          <!-- xmltokenizer using woodstox -->
-          <dependency>
-            <groupId>org.codehaus.woodstox</groupId>
-            <artifactId>woodstox-core-asl</artifactId>
-            <version>${woodstox-version}</version>
-            <scope>test</scope>
-          </dependency>
-        </dependencies>
-    </profile>
-
-  <profile>
-      <id>jdk8</id>
-      <activation>
-        <jdk>(,1.8]</jdk>
-      </activation>
-      <dependencies>
-        <!-- xmltokenizer using woodstox -->
-        <dependency>
-          <groupId>org.codehaus.woodstox</groupId>
-          <artifactId>woodstox-core-asl</artifactId>
-          <version>${woodstox-version}</version>
-          <scope>test</scope>
-        </dependency>
-      </dependencies>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>jaxb2-maven-plugin</artifactId>
-            <version>2.3.1</version>
-            <executions>
-              <execution>
-                <id>generate schema</id>
-                <phase>generate-test-sources</phase>
-                <goals>
-                  <goal>schemagen</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <outputDirectory>${project.build.directory}/schema</outputDirectory>
-              <sources>
-                <source>${project.build.directory}/schema-src</source>
-              </sources>
-              <createJavaDocAnnotations>false</createJavaDocAnnotations>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <profile>
-      <id>jdk9+-build</id>
-      <activation>
-        <jdk>[9,)</jdk>
-      </activation>
-      <dependencies>
-        <!-- xmltokenizer using woodstox -->
-        <dependency>
-          <groupId>org.codehaus.woodstox</groupId>
-          <artifactId>woodstox-core-asl</artifactId>
-          <version>${woodstox-version}</version>
-          <scope>test</scope>
-        </dependency>
-      </dependencies>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <argLine>--add-modules java.xml.bind,java.xml.ws --add-opens java.base/java.lang=ALL-UNNAMED --add-exports=java.naming/com.sun.jndi.ldap=ALL-UNNAMED --add-exports=java.xml.bind/com.sun.xml.internal.bind=ALL-UNNAMED --add-exports=java.xml.bind/com.sun.xml.internal.bind.v2=ALL-UNNAMED --add-exports=java.xml.bind/com.sun.xml.internal.bind.v2.runtime.reflect=ALL-UNNAMED</argLine>
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>jaxb2-maven-plugin</artifactId>
-            <version>2.3.1</version>
-            <dependencies>
-              <dependency>
-                <groupId>org.glassfish.jaxb</groupId>
-                <artifactId>jaxb-jxc-jdk9</artifactId>
-                <version>${jaxb-version}</version>
-              </dependency>
-              <dependency>
-                <groupId>javax.activation</groupId>
-                <artifactId>javax.activation-api</artifactId>
-                <version>1.2.0</version>
-              </dependency>
-            </dependencies>
-            <executions>
-              <execution>
-                <id>generate schema</id>
-                <phase>generate-test-sources</phase>
-                <goals>
-                  <goal>schemagen</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <outputDirectory>${project.build.directory}/schema</outputDirectory>
-              <sources>
-                <source>${project.build.directory}/schema-src</source>
-              </sources>
-              <createJavaDocAnnotations>false</createJavaDocAnnotations>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
   </profiles>
 

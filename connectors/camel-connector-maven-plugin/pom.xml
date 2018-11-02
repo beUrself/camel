@@ -51,6 +51,12 @@
       <scope>provided</scope>
     </dependency>
 
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+      <version>${annotation-api-version}</version>
+    </dependency>
+
     <!-- use jackson json parser -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
