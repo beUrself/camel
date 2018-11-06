@@ -113,7 +113,21 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+                <dependencies>
+                  <dependency>
+                    <groupId>org.codehaus.groovy</groupId>
+                    <artifactId>groovy-ant</artifactId>
+                    <version>${groovy-version}</version>
+                    <scope>runtime</scope>
+                  </dependency>
+                  <dependency>
+                    <groupId>org.codehaus.groovy</groupId>
+                    <artifactId>groovy-xml</artifactId>
+                    <version>${groovy-version}</version>
+                    <scope>runtime</scope>
+                  </dependency>
+                </dependencies>
+              </plugin>
             <plugin>
                 <!--
                      This is needed so that the camel-checkstyle.xml is

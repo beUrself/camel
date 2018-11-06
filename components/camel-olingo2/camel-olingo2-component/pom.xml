@@ -330,6 +330,14 @@
                 </configuration>
               </execution>
             </executions>
+            <dependencies>
+                <dependency>
+                    <groupId>org.codehaus.groovy</groupId>
+                    <artifactId>groovy</artifactId>
+                    <version>${groovy-version}</version>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
           </plugin>
           <plugin>
             <artifactId>maven-archetype-plugin</artifactId>
