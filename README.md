@@ -126,8 +126,7 @@ Control Number (ECCN) 5D002.C.1, which includes information security
 software using or performing cryptographic functions with asymmetric
 algorithms.  The form and manner of this Apache Software Foundation
 distribution makes it eligible for export under the License Exception
-ENC Technology Software Unrestricted (TSU) exception (see the BIS
-Export Administration Regulations, Section 740.13) for both object
+ENC Technology Software Unrestricted (TSU) exception for both object
 code and source code.
 
 The following provides more details on the included cryptographic
